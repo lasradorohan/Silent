@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/chats_fragment">
+
+    <fragment
+        android:id="@+id/requests_fragment"
+        android:name="com.compultra.silent.ui.requests.RequestsFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_requests" />
+    <fragment
+        android:id="@+id/chats_fragment"
+        android:name="com.compultra.silent.ui.chats.ChatsFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_firstFragment_to_messagesFragment"
+            app:destination="@id/messages_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/add_fragment"
+        android:name="com.compultra.silent.ui.add.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" />
+    <fragment
+        android:id="@+id/messages_fragment"
+        android:name="com.compultra.silent.ui.messages.MessagesFragment"
+        android:label="MessagesFragment" />
+</navigation>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="@integer/anim_duration"
+        motion:motionInterpolator="easeInOut">
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/thumb"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintEnd_toEndOf="@+id/textChats"
+            motion:layout_constraintStart_toStartOf="@+id/textChats" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/thumb"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintEnd_toEndOf="@+id/textRequests"
+            motion:layout_constraintStart_toStartOf="@+id/textRequests" />
+<!--        <Constraint-->
+<!--            android:id="@+id/textChats"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            motion:layout_constraintStart_toStartOf="parent"-->
+<!--            motion:layout_constraintEnd_toStartOf="@+id/textAdd"-->
+<!--            motion:layout_constraintHorizontal_bias="0.5" />-->
+<!--        <Constraint-->
+<!--            android:id="@+id/textAdd"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            motion:layout_editor_absoluteY="0dp"-->
+<!--            motion:layout_constraintEnd_toStartOf="@+id/textRequests"-->
+<!--            motion:layout_constraintStart_toEndOf="@+id/textChats"-->
+<!--            motion:layout_constraintHorizontal_bias="0.5" />-->
+    </ConstraintSet>
+
+</MotionScene>

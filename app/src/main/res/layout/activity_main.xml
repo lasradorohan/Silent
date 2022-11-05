@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/main_nav_host"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/header_bar"
+        android:layout_above="@id/bottomnav"
+        app:defaultNavHost="true"
+        android:layout_alignWithParentIfMissing="true"
+        app:navGraph="@navigation/main_nav_graph"/>
+
+
+    <TextView
+        android:id="@+id/header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/segoe_display_semibold"
+        android:paddingHorizontal="8dp"
+        android:text="@string/app_name"
+        android:textColor="@color/light_primary_text"
+        android:textSize="28sp" />
+
+
+    <!--    <LinearLayout xmlns:tools="http://schemas.android.com/tools"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:divider="@drawable/linearlayout_divider"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:padding="16dp"-->
+    <!--        android:showDividers="middle"-->
+    <!--        tools:context=".MainActivity">-->
+
+    <!--        <android.widget.Button style="@style/CustomButton" />-->
+
+    <!--        <android.widget.Button style="@style/CustomButton" />-->
+
+
+    <!--    </LinearLayout>-->
+
+
+    <RelativeLayout
+        android:id="@+id/bottomnav"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/navbar_background"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="8dp">
+
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/bottomnav_motionlayout"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@drawable/navbar_track"
+            android:gravity="center"
+            app:layoutDescription="@xml/navbar_motionscene">
+            <!--            android:layout_height="wrap_content"-->
+
+            <View
+                android:id="@+id/thumb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/navbar_slider" />
+
+            <android.widget.Button
+                android:id="@+id/textChats"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/segoe_text_regular"
+                android:text="Chats"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_primary_text"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/textAdd"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <android.widget.Button
+                android:id="@+id/textAdd"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:fontFamily="@font/segoe_icons"
+                android:gravity="center"
+                android:text="\ue710"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/light_primary_text"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/textRequests"
+                app:layout_constraintStart_toEndOf="@+id/textChats" />
+
+            <android.widget.Button
+                android:id="@+id/textRequests"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:clickable="true"
+                android:fontFamily="@font/segoe_text_regular"
+                android:gravity="center"
+                android:text="Requests"
+                android:textAllCaps="false"
+                android:textColor="@color/light_primary_text"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textAdd" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

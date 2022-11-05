@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/clickable_item_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="14dp"
+
+    >
+
+    <TextView
+        android:id="@+id/initials"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/contact_placeholder_background"
+        android:fontFamily="@font/segoe_display_semibold"
+        android:gravity="center"
+        android:text="BS"
+        android:textColor="@color/light_primary_text"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@null"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:fontFamily="@font/segoe_small_semibold"
+            android:text="John Doe"
+            android:textColor="@color/light_primary_text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:ellipsize="end"
+            android:fontFamily="@font/segoe_text_regular"
+            android:maxLines="1"
+            android:text="@string/requested_date"
+            android:textColor="@color/light_secondary_text"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:fontFamily="@font/segoe_icons"
+        android:gravity="center"
+        android:text="\ue710"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/light_primary_text"
+        android:textSize="24sp" />
+
+</LinearLayout>
+
