@@ -6,16 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.compultra.silent.data.PhonebookHelper
 import com.compultra.silent.ui.common.ListGroupDecoration
 import com.compultra.silent.ui.common.ListSingleHeaderDecoration
 import com.compultra.silent.databinding.FragmentAddBinding
 
 class AddFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = AddFragment()
-    }
-
     val viewModel by activityViewModels<AddViewModel>()
 
     private lateinit var binding: FragmentAddBinding
@@ -31,7 +27,8 @@ class AddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = AddItemAdapter()
         binding.addList.adapter = adapter
-        adapter.submitList(AddDataSource().load())
+
+        viewModel.contacts.observe(viewLifecycleOwner) { adapter.submitList(it) }
 
         binding.addList.addItemDecoration(ListGroupDecoration(requireContext()))
         binding.addList.addItemDecoration(ListSingleHeaderDecoration(requireContext(), "Add"))

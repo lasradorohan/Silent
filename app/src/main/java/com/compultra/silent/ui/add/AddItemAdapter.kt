@@ -5,16 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.compultra.silent.data.Contact
 import com.compultra.silent.databinding.AddListitemBinding
 
-class AddItemAdapter: ListAdapter<AddDataModel, AddItemAdapter.AddItemViewHolder>(DiffCallback) {
+class AddItemAdapter: ListAdapter<Contact, AddItemAdapter.AddItemViewHolder>(DiffCallback) {
 
     class AddItemViewHolder(private val binding: AddListitemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: AddDataModel){
+        fun bind(data: Contact){
             binding.apply {
                 initials.text = data.initials
                 name.text = data.name
-                number.text = data.number
+                number.text = data.address
             }
         }
     }
@@ -27,14 +28,14 @@ class AddItemAdapter: ListAdapter<AddDataModel, AddItemAdapter.AddItemViewHolder
         holder.bind(getItem(position))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<AddDataModel>() {
-        override fun areItemsTheSame(oldItem: AddDataModel, newItem: AddDataModel): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Contact>() {
+        override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem === newItem
         }
-        override fun areContentsTheSame(oldItem: AddDataModel, newItem: AddDataModel): Boolean {
+        override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
             return oldItem.initials == newItem.initials
                     && oldItem.name == newItem.name
-                    && oldItem.number == newItem.number
+                    && oldItem.address == newItem.address
         }
 
     }

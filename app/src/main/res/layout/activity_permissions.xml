@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PermissionsActivity">
+
+    <TextView
+        android:id="@+id/header_bar"
+        style="@style/AppnameHeader"
+        android:layout_alignParentTop="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_bar"
+        android:layout_marginHorizontal="16sp"
+        android:layout_marginVertical="28dp"
+        android:background="@drawable/general_item_background"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/sub_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:fontFamily="@font/segoe_display_semibold"
+            android:text="Grant Permissions"
+            android:textAlignment="center"
+            android:textColor="@color/light_primary_text"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/explanation_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sub_header"
+            android:layout_marginHorizontal="16sp"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:fontFamily="@font/segoe_text_regular"
+            android:text="Please grant the following permissions for the app to function properly:"
+            android:textColor="@color/light_primary_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:background="@null"
+            android:id="@+id/permissions_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/explanation_text"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/segoe_text_regular"
+            android:textColor="@color/light_primary_text"
+            android:textSize="16sp"
+            tools:text="PERMISSION_INTERNET\nPERMISSION_ITNERNET" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <android.widget.Button
+            android:id="@+id/button_grant"
+            style="@style/LargePillButtonPrimary"
+            android:layout_above="@id/button_settings"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:text="Grant" />
+
+        <android.widget.Button
+            android:id="@+id/button_settings"
+            style="@style/LargePillButtonSecondary"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:text="Open Settings" />
+    </RelativeLayout>
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/fab"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom|end"-->
+    <!--        android:layout_marginEnd="@dimen/fab_margin"-->
+    <!--        android:layout_marginBottom="16dp"-->
+    <!--        app:srcCompat="@android:drawable/ic_dialog_email" />-->
+
+</RelativeLayout>

@@ -15,4 +15,5 @@
     <string name="placeholder_long_text_line">Messaging to let you know that I wanted to let you know that i wanted</string>
     <string name="placeholder_short_text_line">Hey there i\'m not creepy</string>
     <string name="requested_date">Requested - %s</string>
+    <string name="title_activity_permissions">PermissionsActivity</string>
 </resources>

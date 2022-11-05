@@ -15,3 +15,5 @@ inline fun <reified T> Resources.dpToPx(value: Int): T {
         else -> throw IllegalStateException("Type not supported")
     }
 }
+
+const val MYTAG = "WOHOO"

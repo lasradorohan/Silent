@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.compultra.silent">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Silent"
         tools:targetApi="31">
+        <activity
+            android:name=".PermissionsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_permissions"
+            android:theme="@style/Theme.Silent.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

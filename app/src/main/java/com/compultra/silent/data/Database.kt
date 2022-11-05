@@ -8,10 +8,14 @@ import androidx.room.RoomDatabase
 const val MESSAGES_TABLE = "messages"
 const val INCOMING_TABLE = "incoming"
 const val OUTGOING_TABLE = "outgoing"
+
+const val KEYS_TABLE = "keys"
+const val CONFIG_TABLE = "config"
+
 const val DATABASE_NAME = "messages"
 
 @Database(
-    entities = [TextMessage::class, IncomingRequestMessage::class, OutgoingRequestMessage::class],
+    entities = [SilentMessage.Text::class, SilentMessage.Request.Incoming::class, SilentMessage.Request.Outgoing::class, AcceptedKeys::class, MyConfig::class],
     version = 1
 )
 abstract class MessagesDatabase : RoomDatabase() {
@@ -21,7 +25,7 @@ abstract class MessagesDatabase : RoomDatabase() {
     companion object {
         //instantiate
         private lateinit var INSTANCE: MessagesDatabase
-        fun getDatabase(context: Context) = synchronized(MessagesDatabase::class.java) {
+        fun getInstance(context: Context) = synchronized(MessagesDatabase::class.java) {
             if (!::INSTANCE.isInitialized) {
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,

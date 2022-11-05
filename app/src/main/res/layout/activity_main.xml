@@ -20,31 +20,8 @@
 
     <TextView
         android:id="@+id/header_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:fontFamily="@font/segoe_display_semibold"
-        android:paddingHorizontal="8dp"
-        android:text="@string/app_name"
-        android:textColor="@color/light_primary_text"
-        android:textSize="28sp" />
-
-
-    <!--    <LinearLayout xmlns:tools="http://schemas.android.com/tools"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:divider="@drawable/linearlayout_divider"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:padding="16dp"-->
-    <!--        android:showDividers="middle"-->
-    <!--        tools:context=".MainActivity">-->
-
-    <!--        <android.widget.Button style="@style/CustomButton" />-->
-
-    <!--        <android.widget.Button style="@style/CustomButton" />-->
-
-
-    <!--    </LinearLayout>-->
+        style="@style/AppnameHeader" />
 
 
     <RelativeLayout

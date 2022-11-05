@@ -8,14 +8,15 @@ import android.provider.ContactsContract
 import android.provider.Telephony
 import android.telephony.SmsManager
 
-class PhonebookHelper(context: Context) {
-    private val context: Context = context.applicationContext
+class PhonebookHelper private constructor(context: Context) {
+//    private val context: Context = context.applicationContext
+    private val contentResolver = context.contentResolver
     private val smsManager: SmsManager = context.getSystemService(SmsManager::class.java)
 
     suspend fun getPlainMessages(
         queryNumber: String? = null,
         queryTimestamp: Long? = null
-    ): List<PlainMessage> {
+    ): List<SilentMessage.Unresolved> {
         var selectionQuery: String? = null
         if (queryNumber != null) {
             selectionQuery = "${Telephony.Sms.ADDRESS}=\"$queryNumber\""
@@ -25,14 +26,14 @@ class PhonebookHelper(context: Context) {
             else selectionQuery = ""
             selectionQuery += "${Telephony.Sms.DATE}>$queryTimestamp"
         }
-        val c = context.contentResolver.query(
+        val c = contentResolver.query(
             Telephony.Sms.CONTENT_URI,
             null,
             selectionQuery,
             null,
             null
         )
-        val result = mutableListOf<PlainMessage>()
+        val result = mutableListOf<SilentMessage.Unresolved>()
         c?.use {
             if (c.moveToFirst()) {
                 while (!c.isAfterLast) {
@@ -49,7 +50,7 @@ class PhonebookHelper(context: Context) {
                             Telephony.Sms.MESSAGE_TYPE_OUTBOX -> MessageType.OUTBOX
                             else -> MessageType.UNKNOWN
                         }
-                    result.add(PlainMessage(address, timestamp, message, type))
+                    result.add(SilentMessage.Unresolved(address, timestamp, message, type))
                     c.moveToNext()
                 }
             }
@@ -60,8 +61,7 @@ class PhonebookHelper(context: Context) {
 
     @Deprecated("no use")
     suspend fun getContactsHavingMessages(): List<Contact> {
-        val cr = context.contentResolver
-        val c: Cursor? = cr.query(
+        val c: Cursor? = contentResolver.query(
             Telephony.Sms.CONTENT_URI,
             arrayOf("DISTINCT address", "body"),
             "address IS NOT NULL) GROUP BY (address",
@@ -90,7 +90,7 @@ class PhonebookHelper(context: Context) {
             ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
             Uri.encode(address)
         )
-        val cursor: Cursor? = context.contentResolver.query(
+        val cursor: Cursor? = contentResolver.query(
             uri,
             arrayOf(ContactsContract.PhoneLookup.DISPLAY_NAME),
             ContactsContract.PhoneLookup.NUMBER + "='" + address + "'",
@@ -152,7 +152,7 @@ class PhonebookHelper(context: Context) {
         )//2
         val phonesColumns = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
 
-        val cursor = context.contentResolver.query(
+        val cursor = contentResolver.query(
             ContactsContract.Contacts.CONTENT_URI,
             contactsColumns,
             null,
@@ -170,7 +170,7 @@ class PhonebookHelper(context: Context) {
 
                 val hasPhone = c.getString(2).equals("1")
                 if (hasPhone) {
-                    val phones = context.contentResolver.query(
+                    val phones = contentResolver.query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                         phonesColumns,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
@@ -188,5 +188,15 @@ class PhonebookHelper(context: Context) {
             }
         }
         return result
+    }
+
+    companion object {
+        private lateinit var INSTANCE: PhonebookHelper
+        public fun getInstance(context: Context) = synchronized(PhonebookHelper::class.java) {
+            if(!::INSTANCE.isInitialized) {
+                INSTANCE = PhonebookHelper(context.applicationContext)
+            }
+            INSTANCE
+        }
     }
 }

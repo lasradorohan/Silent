@@ -1,6 +1,8 @@
 package com.compultra.silent
 
+import android.Manifest
 import android.animation.ObjectAnimator
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.transition.Slide
 import android.transition.TransitionManager
@@ -8,6 +10,7 @@ import android.transition.TransitionSet
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -23,15 +26,23 @@ import com.compultra.silent.ui.requests.RequestsFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     var selectedIdx = 0
+
+    private val requiredPermissions = listOf(
+        Manifest.permission.SEND_SMS,
+        Manifest.permission.READ_SMS,
+        Manifest.permission.RECEIVE_SMS,
+        Manifest.permission.READ_CONTACTS
+    )
 
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ensureRequiredPermissions()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -45,7 +56,29 @@ class MainActivity : AppCompatActivity() {
         setupBottomBar()
 
 
+    }
 
+    override fun onStart() {
+        super.onStart()
+        ensureRequiredPermissions()
+    }
+
+    fun ensurePermissions(
+        permissions: List<String>,
+        someDenied: (List<String>) -> Unit = {},
+        allGranted: () -> Unit = {}
+    ) {
+        val denied = permissions.filter {
+            ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+        if (denied.isNotEmpty()) someDenied(denied)
+        else allGranted()
+    }
+
+    fun ensureRequiredPermissions() {
+        ensurePermissions(requiredPermissions, someDenied = { permissions ->
+            PermissionsActivity.start(this, ArrayList(permissions))
+        })
     }
 
     fun setupBottomBar() {
