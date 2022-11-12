@@ -3,8 +3,10 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:background="@drawable/clickable_item_background"
     android:clickable="true"
     android:focusable="true"
@@ -57,6 +59,15 @@
             android:text="@string/requested_date"
             android:textColor="@color/light_secondary_text"
             android:textSize="14sp" />
+
+        <android.widget.Button
+            android:id="@+id/button_request"
+            style="@style/CustomButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp"
+            android:text="Send Request"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </LinearLayout>
 
     <TextView
@@ -70,6 +81,7 @@
         android:textAllCaps="false"
         android:textColor="@color/light_primary_text"
         android:textSize="24sp" />
+
 
 </LinearLayout>
 

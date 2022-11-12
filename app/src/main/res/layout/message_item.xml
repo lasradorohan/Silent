@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="4dp"
-    android:background="@drawable/general_item_background"
-    android:gravity="end"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="4dp"
 
-    <TextView
-        android:id="@+id/message"
+    >
+
+    <LinearLayout
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:fontFamily="@font/segoe_text_regular"
-        android:maxWidth="260dp"
-        android:textColor="@color/light_primary_text"
-        android:textSize="14sp"
-        tools:text="@string/placeholder_long_text_line" />
+        android:background="@drawable/general_item_background"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:fontFamily="@font/segoe_text_regular"
-        android:textColor="@color/light_secondary_text"
-        android:textSize="12sp"
-        tools:text="Dec 30, 2019 07:52" />
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:fontFamily="@font/segoe_text_regular"
+            android:maxWidth="260dp"
+            android:textColor="@color/light_primary_text"
+            android:textSize="14sp"
+            tools:text="@string/placeholder_long_text_line" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:fontFamily="@font/segoe_text_regular"
+            android:textColor="@color/light_secondary_text"
+            android:textSize="12sp"
+            tools:text="Dec 30, 2019 07:52" />
+
+    </LinearLayout>
+</FrameLayout>

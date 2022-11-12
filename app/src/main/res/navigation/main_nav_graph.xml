@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/chats_fragment">
+
+    app:startDestination="@id/emptyFragment">
 
     <fragment
         android:id="@+id/requests_fragment"
@@ -28,4 +29,9 @@
         android:id="@+id/messages_fragment"
         android:name="com.compultra.silent.ui.messages.MessagesFragment"
         android:label="MessagesFragment" />
+    <fragment
+        android:id="@+id/emptyFragment"
+        android:name="com.compultra.silent.ui.empty.EmptyFragment"
+        android:label="fragment_empty"
+        tools:layout="@layout/fragment_empty" />
 </navigation>

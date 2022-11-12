@@ -5,25 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.compultra.silent.databinding.ChatListitemBinding
+import com.compultra.silent.data.LatestTextMessage
+import com.compultra.silent.databinding.ChatItemBinding
 
-class ChatItemAdapter(val onItemClick: (ChatsDataModel) -> Unit = {}) :
-    ListAdapter<ChatsDataModel, ChatItemAdapter.ChatItemViewHolder>(DiffCallback) {
+class ChatItemAdapter(val onItemClick: (LatestTextMessage) -> Unit = {}) :
+    ListAdapter<LatestTextMessage, ChatItemAdapter.ChatItemViewHolder>(DiffCallback) {
 
     class ChatItemViewHolder(
-        private val binding: ChatListitemBinding,
+        private val binding: ChatItemBinding,
         private val onClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener { onClick(adapterPosition) }
         }
 
-        fun bind(data: ChatsDataModel) {
+        fun bind(data: LatestTextMessage) {
             binding.apply {
                 initials.text = data.initials
                 name.text = data.name
                 message.text = data.message
-                timestamp.text = data.timestampFormatted
+                timestamp.text = data.timestampFormated
             }
         }
 
@@ -31,26 +32,26 @@ class ChatItemAdapter(val onItemClick: (ChatsDataModel) -> Unit = {}) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatItemViewHolder {
         return ChatItemViewHolder(
-            ChatListitemBinding.inflate(
+            ChatItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
-        ) {
-            onItemClick(getItem(it))
-        }
+            ), {
+                onItemClick(getItem(it))
+            }
+        )
     }
 
     override fun onBindViewHolder(holder: ChatItemViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ChatsDataModel>() {
-        override fun areItemsTheSame(oldItem: ChatsDataModel, newItem: ChatsDataModel): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<LatestTextMessage>() {
+        override fun areItemsTheSame(oldItem: LatestTextMessage, newItem: LatestTextMessage): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: ChatsDataModel, newItem: ChatsDataModel): Boolean {
+        override fun areContentsTheSame(oldItem: LatestTextMessage, newItem: LatestTextMessage): Boolean {
             return oldItem.initials == newItem.initials
                     && oldItem.name == newItem.name
                     && oldItem.message == newItem.message
@@ -61,6 +62,6 @@ class ChatItemAdapter(val onItemClick: (ChatsDataModel) -> Unit = {}) :
 
 }
 
-fun ChatListitemBinding.setOnClick(data: ChatsDataModel, onClick: (ChatsDataModel) -> Unit) {
+fun ChatItemBinding.setOnClick(data: LatestTextMessage, onClick: (LatestTextMessage) -> Unit) {
     root.setOnClickListener { onClick(data) }
 }

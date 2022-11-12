@@ -18,7 +18,7 @@
         android:scrollbars="vertical"
         android:paddingHorizontal="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/chat_listitem"
+        tools:listitem="@layout/chat_item"
         />
 
 </FrameLayout>

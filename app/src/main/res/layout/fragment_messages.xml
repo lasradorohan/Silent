@@ -15,28 +15,29 @@
         android:orientation="horizontal"
         android:paddingVertical="8dp">
 
-<!--        TODO: back button-->
-<!--        <android.widget.Button-->
-<!--            android:id="@+id/back"-->
-<!--            android:layout_width="48dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:background="@null"-->
-<!--            android:fontFamily="@font/segoe_icons"-->
-<!--            android:gravity="center"-->
-<!--            android:text="\ue830"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:textColor="@color/light_primary_text"-->
-<!--            android:textSize="16sp" />-->
+        <android.widget.Button
+            android:id="@+id/button_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/segoe_icons"
+            android:gravity="center"
+            android:text="\ue830"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/light_primary_text"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/initials"
-            style="@style/InitialsPlaceholder"
-            android:layout_marginHorizontal="8dp" />
+            style="@style/InitialsPlaceholder" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:background="@null"
             android:orientation="vertical">
 
@@ -70,7 +71,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@drawable/messages_list_background"
+        android:clipToPadding="true"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
         tools:listitem="@layout/message_item" />
+    <!--    app:stackFromEnd="true"-->
+    <!--        android:paddingHorizontal="8dp"-->
+    <!--        android:paddingTop="8dp"-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,34 +90,32 @@
             android:id="@+id/compose"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:layout_weight="1"
+            android:background="@drawable/compose_text_background"
             android:fontFamily="@font/segoe_text_regular"
             android:hint="Message"
+            android:maxLines="6"
+            android:minHeight="32dp"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
-            tools:text="@string/placeholder_long_text_line"
+            android:scrollbars="vertical"
             android:textColor="@color/light_primary_text"
             android:textColorHint="@color/light_secondary_text"
             android:textSize="14sp"
-            android:minHeight="32dp"
-            android:maxLines="6"
-            android:scrollbars="vertical"
-            android:background="@drawable/compose_text_background"
-            android:layout_marginEnd="10dp"
-            />
+            tools:text="@string/placeholder_long_text_line" />
 
         <android.widget.Button
             android:id="@+id/send"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="bottom"
-            android:fontFamily="@font/segoe_icons"
-            android:textSize="16sp"
-            android:stateListAnimator="@null"
-            android:textColor="@drawable/send_button_text"
             android:background="@drawable/send_button_background"
+            android:fontFamily="@font/segoe_icons"
+            android:stateListAnimator="@null"
             android:text="\ue725"
-            />
+            android:textColor="@drawable/send_button_text"
+            android:textSize="16sp" />
     </LinearLayout>
 
 

@@ -14,14 +14,19 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import com.compultra.silent.data.Repository
 import com.compultra.silent.ui.add.AddFragment
 import com.compultra.silent.ui.chats.ChatsFragment
 import com.compultra.silent.databinding.ActivityMainBinding
+import com.compultra.silent.security.EncryptionManager
 import com.compultra.silent.ui.messages.MessagesFragment
 import com.compultra.silent.ui.requests.RequestsFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +47,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ensureRequiredPermissions()
+        ensurePermissions(requiredPermissions, someDenied = { permissions ->
+            PermissionsActivity.start(this, ArrayList(permissions))
+        })
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -55,12 +62,19 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomBar()
 
-
     }
 
     override fun onStart() {
         super.onStart()
-        ensureRequiredPermissions()
+        ensurePermissions(requiredPermissions, someDenied = { permissions ->
+            PermissionsActivity.start(this, ArrayList(permissions))
+        }, allGranted = {
+            navController.popBackStack()
+            navController.navigate(R.id.chats_fragment)
+            lifecycleScope.launch(Dispatchers.IO) {
+                Repository.getInstance(this@MainActivity).refreshMessages()
+            }
+        })
     }
 
     fun ensurePermissions(

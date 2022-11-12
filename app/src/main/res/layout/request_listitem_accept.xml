@@ -52,7 +52,9 @@
             />
     </LinearLayout>
 
-    <android.widget.Button style="@style/PillButtonPrimary" />
+    <android.widget.Button
+        android:id="@+id/button_accept"
+        style="@style/PillButtonPrimary" />
 
     </LinearLayout>
 

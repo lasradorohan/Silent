@@ -7,8 +7,18 @@ import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.Telephony
 import android.telephony.SmsManager
+import android.util.Log
+import com.compultra.silent.MYTAG
 
 class PhonebookHelper private constructor(context: Context) {
+
+    val phoneRegex = Regex("[ ()-]")
+    fun String.normalizeAddress(): String {
+        val normalized = phoneRegex.replace(this, "")
+        Log.d(MYTAG, "Replacing $this by $normalized")
+        return normalized
+    }
+
 //    private val context: Context = context.applicationContext
     private val contentResolver = context.contentResolver
     private val smsManager: SmsManager = context.getSystemService(SmsManager::class.java)
@@ -39,7 +49,7 @@ class PhonebookHelper private constructor(context: Context) {
                 while (!c.isAfterLast) {
                     val smsDate: String = c.getString(c.getColumnIndexOrThrow(Telephony.Sms.DATE))
                     val address: String =
-                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS))
+                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS)).normalizeAddress()
 //                    val displayName = getContactNameForAddress(context, address)
                     val message: String = c.getString(c.getColumnIndexOrThrow(Telephony.Sms.BODY))
                     val timestamp = smsDate.toLong()
@@ -74,7 +84,7 @@ class PhonebookHelper private constructor(context: Context) {
             if (c.moveToFirst()) {
                 while (!c.isAfterLast) {
                     val address: String =
-                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS))
+                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS)).normalizeAddress()
                     val displayName = getDisplayNameForAddress(address)
                     result.add(Contact(address, displayName))
                     c.moveToNext()
@@ -84,7 +94,7 @@ class PhonebookHelper private constructor(context: Context) {
         return result
     }
 
-    suspend fun getDisplayNameForAddress(address: String): String {
+    fun getDisplayNameForAddress(address: String): String {
         var contact: String = address
         val uri: Uri = Uri.withAppendedPath(
             ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
@@ -126,10 +136,10 @@ class PhonebookHelper private constructor(context: Context) {
     }
 
     suspend fun sendSmsMessageLong(
-        context: Context,
         destinationAddress: String,
         message: String
     ) {
+        Log.d(MYTAG, "Sending message: $destinationAddress -> $message")
         val parts = smsManager.divideMessage(message)
         val sourceAddress: String? = null
         val sentIntent: ArrayList<PendingIntent>? = null
@@ -179,7 +189,7 @@ class PhonebookHelper private constructor(context: Context) {
                     )
                     phones?.use {
                         while (phones.moveToNext()) {
-                            val phoneNumber = phones.getString(0)
+                            val phoneNumber = phones.getString(0).normalizeAddress()
                             result.add(Contact(phoneNumber, name))
                         }
                     }

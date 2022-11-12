@@ -52,7 +52,9 @@
             />
     </LinearLayout>
 
-    <android.widget.Button style="@style/PillButtonSecondary" />
+<!--    <android.widget.Button-->
+<!--        android:id="@+id/button_withdraw"-->
+<!--        style="@style/PillButtonSecondary" />-->
 
     </LinearLayout>
 

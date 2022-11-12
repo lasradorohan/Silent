@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase
 const val MESSAGES_TABLE = "messages"
 const val INCOMING_TABLE = "incoming"
 const val OUTGOING_TABLE = "outgoing"
+const val LATEST_TABLE = "latest"
 
 const val KEYS_TABLE = "keys"
 const val CONFIG_TABLE = "config"
@@ -15,7 +16,7 @@ const val CONFIG_TABLE = "config"
 const val DATABASE_NAME = "messages"
 
 @Database(
-    entities = [SilentMessage.Text::class, SilentMessage.Request.Incoming::class, SilentMessage.Request.Outgoing::class, AcceptedKeys::class, MyConfig::class],
+    entities = [SilentMessage.Text::class, SilentMessage.Request.Incoming::class, SilentMessage.Request.Outgoing::class, AcceptedKey::class, MyConfig::class, LatestTextMessage::class],
     version = 1
 )
 abstract class MessagesDatabase : RoomDatabase() {

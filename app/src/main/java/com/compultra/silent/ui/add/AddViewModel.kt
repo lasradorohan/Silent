@@ -9,6 +9,12 @@ import com.compultra.silent.data.Repository
 import kotlinx.coroutines.launch
 
 class AddViewModel(application: Application) : AndroidViewModel(application) {
+    fun sendRequest(address: String) {
+        viewModelScope.launch {
+            repository.sendRequest(address)
+        }
+    }
+
     // TODO: Implement the ViewModel
     private val repository = Repository.getInstance(application.applicationContext)
 

@@ -3,9 +3,9 @@ package com.compultra.silent.data
 import androidx.room.Entity
 
 @Entity(tableName = KEYS_TABLE, primaryKeys = ["address"])
-data class AcceptedKeys(
+data class AcceptedKey(
     val address: String,
-    val key: String
+    val publicKey: String
 )
 
 @Entity(tableName = CONFIG_TABLE, primaryKeys = ["argument"])
@@ -14,8 +14,9 @@ data class MyConfig (
     val value: String
 ) {
     companion object {
-        val PRIVATE_KEY = "PRIVATE_KEY"
-        val PUBLIC_KEY = "PUBLIC_KEY"
-        val LOCAL_ENCRYPTION_KEY = "LOCAL_ENCRYPTION_KEY"
+        const val PRIVATE_KEY = "PRIVATE_KEY"
+        const val PUBLIC_KEY = "PUBLIC_KEY"
+        const val LOCAL_ENCRYPTION_KEY = "LOCAL_ENCRYPTION_KEY"
+        const val LATEST_TIMESTAMP = "LATEST_TIMESTAMP"
     }
 }

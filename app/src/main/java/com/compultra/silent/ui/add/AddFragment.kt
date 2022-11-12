@@ -25,7 +25,9 @@ class AddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = AddItemAdapter()
+        val adapter = AddItemAdapter {
+            viewModel.sendRequest(it.address)
+        }
         binding.addList.adapter = adapter
 
         viewModel.contacts.observe(viewLifecycleOwner) { adapter.submitList(it) }

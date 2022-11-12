@@ -13,7 +13,7 @@
         android:scrollbars="vertical"
         android:paddingHorizontal="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/add_listitem" />
+        tools:listitem="@layout/add_item" />
 
 
 
